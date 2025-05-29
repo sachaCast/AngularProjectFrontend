@@ -1,0 +1,16 @@
+.mat-sidenav-container{
+    height: calc(205vh - 115vh);
+}
+mat-sidenav{
+    width: 100px;
+    border-radius: 0px;
+}
+
+a {
+    color: white;
+    text-decoration: none;
+}
+
+form {
+    padding-top: 10px;
+}

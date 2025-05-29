@@ -1,0 +1,63 @@
+<form ngForm #assignmentForm (submit)="addAssignment()">
+    <mat-form-field>
+        <input matInput
+            placeholder="Assignment Name"
+            name="name"
+            [(ngModel)]="assignmentName"
+            required>
+    </mat-form-field>
+
+    <mat-form-field>
+        <input matInput
+            placeholder="Assignment Author"
+            name="author"
+            [(ngModel)]="assignmentAuthor"
+            required>
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label></mat-label>
+        <input matInput [matDatepicker]="picker"
+            placeholder="Choose a date"
+            name="dueDate"
+            [(ngModel)]="assignmentDueDate"
+            required
+        >
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>Choose a subject</mat-label>
+        <mat-select [(ngModel)]="selectedSubject" name="subject" required>
+            @for (subject of subjects; track subject._id) {
+            <mat-option [value]="subject">
+                {{ subject.subject }} ({{ subject.teacher }})
+            </mat-option>
+            }
+        </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+        <input matInput
+            placeholder="Assignment Grade"
+            name="grade"
+            [(ngModel)]="assignmentGrade"
+            required>
+    </mat-form-field>
+
+    <mat-form-field>
+        <input matInput
+            placeholder="Assignment Remark"
+            name="note"
+            [(ngModel)]="assignmentNote"
+            required>
+    </mat-form-field>
+
+    <button mat-stroked-button
+            color="primary"
+        >
+    Add Assignment
+    </button>
+</form>

@@ -1,0 +1,38 @@
+@if(assignment) {
+    <div class="container">
+     <h1>Edition de l'assignment {{assignment.name}}</h1>
+<form #formupdate="ngForm" class="form" (ngSubmit)="onSaveAssignment(); formupdate.reset(); ">
+       <mat-form-field>
+         <input matInput placeholder="Edition du nom" [(ngModel)]="nomAssignment" name="assignment-name">
+       </mat-form-field>
+        <mat-form-field>
+         <input matInput placeholder="Edition de l'autheur" [(ngModel)]="author" name="assignment-author">
+       </mat-form-field>
+        <mat-form-field>
+        <mat-label>Choose a subject</mat-label>
+        <mat-select [(ngModel)]="selectedSubject" name="subject" required>
+            @for (subject of subjects; track subject._id) {
+            <mat-option [value]="subject">
+                {{ subject.subject }} ({{ subject.teacher }})
+            </mat-option>
+            }
+        </mat-select>
+    </mat-form-field>
+       <mat-form-field>
+         <input matInput [matDatepicker]="picker" placeholder="Edition de la date" [(ngModel)]="dateDeRendu" name="date">
+         <mat-datepicker-toggle matSuffix [for]="picker">
+         </mat-datepicker-toggle>
+         <mat-datepicker #picker></mat-datepicker>
+       </mat-form-field>
+       <mat-form-field>
+         <input matInput placeholder="Edition de la note" [(ngModel)]="grade" name="assignment-grade">
+       </mat-form-field>
+       <mat-form-field>
+         <input matInput placeholder="Edition de la remarque" [(ngModel)]="note" name="assignment-note">
+       </mat-form-field>
+       <button mat-raised-button color="primary" [disabled]="((!nomAssignment)||(!dateDeRendu))">
+        Sauver
+      </button>
+    </form>
+   </div>
+}

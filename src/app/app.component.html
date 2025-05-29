@@ -1,0 +1,50 @@
+<div class="container">
+
+    <mat-toolbar>
+        <mat-toolbar-row style="background-color: black">
+            <button mat-button (click)="opened=!opened" style="color: white"><mat-icon>menu</mat-icon></button>
+            <button mat-button><a routerLink="/home" tyle="color: white"><mat-icon style="color: white">home</mat-icon></a></button>
+            <h1>
+                <nav><a routerLink="/home" style="color: white">{{title}}</a></nav>
+            </h1>
+        </mat-toolbar-row>
+    </mat-toolbar>
+
+    <mat-sidenav-container>
+            <mat-sidenav [(opened)]="opened" mode="over" style="background-color: black">
+                <mat-list>
+                    <mat-list-item>
+                        <a routerLink="/home" tyle="color: white">Home</a>
+                    </mat-list-item>
+                    <mat-list-item>
+                        <a routerLink="/add" tyle="color: white">Add</a>
+                    </mat-list-item>
+                </mat-list>
+            </mat-sidenav>
+            <mat-sidenav-content>
+                @if (!this.loggedIn) {
+                    <form (submit)="login()">
+                        <mat-form-field appearance="fill">
+                            <mat-label>Login</mat-label>
+                            <input matInput [(ngModel)]="username" name="username" required>
+                        </mat-form-field>
+                        <mat-form-field appearance="fill">
+                            <mat-label>Mot de passe</mat-label>
+                            <input matInput type="password" [(ngModel)]="password" name="password" required>
+                        </mat-form-field>
+                        <button mat-raised-button color="primary" type="submit">Se connecter</button>
+                    </form>
+                } @else {
+                    <button mat-raised-button color="warn" (click)="logout()">Se déconnecter</button>
+                }
+
+                <router-outlet></router-outlet>
+            </mat-sidenav-content>
+
+    </mat-sidenav-container>
+
+</div>
+
+<!--
+<app-assignments></app-assignments>
+-->

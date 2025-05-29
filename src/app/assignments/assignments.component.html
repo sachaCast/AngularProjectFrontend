@@ -1,0 +1,93 @@
+<h2>{{ title }}</h2>
+
+<main class="container">
+  <div class="ajouterBtn">
+    <a routerLink="/add">
+      <button class="ajouterBtn">Assignments</button>
+    </a>
+  </div>
+
+  <ul>
+    @for (assignment of assignments; track assignment.name) {
+      <nav>
+        <a routerLink="/assignment/{{assignment.id}}">
+          @if (assignment.submitted) {
+            <li class="submitted" (click)="assignmentClique(assignment)">
+              The assignment: {{ assignment.name }} has been submitted in time!
+            </li>
+          } @else {
+            <li class="notSubmitted" (click)="assignmentClique(assignment)">
+              The assignment: {{ assignment.name }} is still due on
+              {{ assignment.dueDate | date }}, NOT SUBMITTED YET!
+            </li>
+          }
+        </a>
+      </nav>
+    }
+  </ul>
+</main>
+
+<!-- ПОЛНАЯ ТАБЛИЦА, подстроена под твой класс -->
+<table>
+  <thead>
+    <tr>
+      <th>Assignment</th>
+      <th>Due Date</th>
+      <th>Submitted</th>
+      <th>Matière</th>
+      <th>Auteur</th>
+      <th>Note</th>
+      <th>Image</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    @for (assignment of assignments; track assignment.name) {
+      <tr>
+        <td>{{ assignment.name }}</td>
+        <td>{{ assignment.dueDate | date }}</td>
+        <td>{{ assignment.submitted ? 'Yes' : 'No' }}</td>
+
+        <!-- matiere нет в классе — заглушка
+        <td>-</td>
+-->
+        <td>{{ assignment.subject || '-' }}</td>
+
+        <!-- заменено: auteur => author -->
+        <td>{{ assignment.author ?? '-' }}</td>
+
+        <!-- заменено: note => grade -->
+        <td>{{ assignment.grade ?? '-' }}</td>
+
+        <!-- image  -->
+        <td>
+           @if (assignment.subject) {
+            <img
+              [src]="'https://angularprojectbackend-4e78.onrender.com/' + assignment.subject + '.jpg'"
+              alt="{{ assignment.subject }}"
+              style="width: 60px; height: auto; border-radius: 4px;"
+            />
+           }
+        </td>
+
+        <td>
+          <button mat-button color="primary" [routerLink]="['/assignment', assignment.id]">
+            Details
+          </button>
+          <button mat-button color="accent"
+                  [routerLink]="['/assignment', assignment.id, 'edit']"
+                  [queryParams]="{nom: assignment.name}"
+                  fragment="edition">
+            Edit
+          </button>
+          <button mat-button color="warn" (click)="onDelete(assignment)">
+  Delete
+</button>
+
+        </td>
+      </tr>
+    }
+  </tbody>
+</table>
+
+<router-outlet></router-outlet>

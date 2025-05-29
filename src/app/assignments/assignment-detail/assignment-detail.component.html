@@ -1,0 +1,52 @@
+@if (assignmentTransmis) {
+    <mat-card>
+      <mat-card-content>
+        <mat-card-title>{{ assignmentTransmis.name }}</mat-card-title>
+        <mat-card-subtitle>{{ assignmentTransmis.dueDate | date: "dd/MM/yyyy" }}</mat-card-subtitle>
+        <mat-card-subtitle>Author: {{ assignmentTransmis.author  }}</mat-card-subtitle>
+        <mat-card-subtitle>Subject: {{ assignmentTransmis.subject  }}</mat-card-subtitle>
+        <mat-card-subtitle>
+           @if (assignmentTransmis.subject) {
+            <img
+              [src]="'https://angularprojectbackend-4e78.onrender.com/' + assignmentTransmis.subject + '.jpg'"
+              alt="{{ assignmentTransmis.subject }}"
+              style="width: 60px; height: auto; border-radius: 4px;"
+            />
+           }
+        </mat-card-subtitle>
+        <mat-card-subtitle>Teacher: {{ assignmentTransmis.teacher  }}</mat-card-subtitle>
+        <mat-card-subtitle>
+           @if (assignmentTransmis.teacher) {
+            <img
+              [src]="'https://angularprojectbackend-4e78.onrender.com/' + assignmentTransmis.teacher + '.jpg'"
+              alt="{{ assignmentTransmis.teacher }}"
+              style="width: 60px; height: auto; border-radius: 4px;"
+            />
+           }
+        </mat-card-subtitle>
+        <mat-card-subtitle>Grade: {{ assignmentTransmis.grade  }}</mat-card-subtitle>
+        <mat-card-subtitle>Note: {{ assignmentTransmis.note  }}</mat-card-subtitle>
+
+        @if (!assignmentTransmis.submitted) {
+  <button mat-raised-button color="accent"
+          (click)="onAssignmentRendu()"
+          [disabled]="!isAdmin() || !isGradeValid()">
+    Submit Assignment
+  </button>
+}
+        <!--<nav><a routerLink="edit">-->
+          <button mat-raised-button color="accent"
+            (click)="onClickEdit()"
+            [disabled]="!isAdmin()">
+            Edit
+          </button>
+        <!--</a></nav>-->
+
+        <button mat-raised-button color="accent" (click)="onDelete()" [disabled]="!isAdmin()">
+          Delete
+        </button>
+      </mat-card-content>
+    </mat-card>
+  }
+
+  <router-outlet></router-outlet>

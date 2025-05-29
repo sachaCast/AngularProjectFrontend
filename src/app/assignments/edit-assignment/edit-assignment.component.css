@@ -1,0 +1,71 @@
+body {
+    background-color: #000;
+    color: #00FF00;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 16px;
+    text-shadow: 0 0 5px #00FF00;
+}
+
+/* Контейнер формы */
+.container {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    border: 1px solid #00FF00;
+    margin-top: 20px;
+    background-color: #000;
+}
+
+/* Заголовок формы */
+.container h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    text-shadow: 0 0 5px #00FF00;
+}
+
+/* Поля формы */
+mat-form-field {
+    display: block;
+    margin-bottom: 20px;
+    width: 100%;
+    color: #00FF00;
+}
+
+input[matInput] {
+    background-color: #000;
+    border: 1px solid #00FF00;
+    color: #00FF00;
+    padding: 10px;
+    font-family: inherit;
+    text-shadow: 0 0 3px #00FF00;
+}
+
+input[matInput]::placeholder {
+    color: #00FF00;
+    opacity: 0.6;
+}
+
+/* Кнопка сохранения */
+button[mat-raised-button] {
+    background-color: #000;
+    border: 1px solid #00FF00;
+    color: #00FF00;
+    padding: 10px 20px;
+    font-family: inherit;
+    cursor: pointer;
+    text-shadow: 0 0 3px #00FF00;
+    box-shadow: 0 0 5px #00FF00;
+}
+
+button[mat-raised-button]:hover {
+    background-color: #00FF00;
+    color: #000;
+    box-shadow: 0 0 10px #00FF00;
+    transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
+}
+
+button[disabled] {
+    opacity: 0.5;
+    border: 1px dashed #00FF00;
+    cursor: not-allowed;
+}
